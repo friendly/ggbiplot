@@ -1,4 +1,6 @@
-GeomCircle <- proto(ggplot2:::Geom, {
+# proto -> ggproto
+
+GeomCircle <- ggplot2::ggproto(ggplot2:::Geom, expr={
   objname <- "circle"
 
   default_stat <- function(.) StatIdentity

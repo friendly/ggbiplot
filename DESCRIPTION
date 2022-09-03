@@ -13,9 +13,9 @@ Depends:
 Imports:
     grid,
     plyr,
-    proto,
     scales
 Enhances:
     FactoMineR, MASS
 License: GPL-2
 URL: http://github.com/vqv/ggbiplot
+RoxygenNote: 7.2.1
