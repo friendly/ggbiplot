@@ -19,6 +19,9 @@
 # 
 
 #' Biplot for Principal Components using ggplot2
+#' 
+#' Takes a principle components object and constructs a biplot, consisting of points showing 
+#' scores on the principle components and vectors showing structure coefficients of the variables with the components.
 #'
 #' @param pcobj           an object returned by prcomp() or princomp()
 #' @param choices         which PCs to plot
@@ -31,16 +34,19 @@
 #' @param labels.size     size of the text used for the labels
 #' @param alpha           alpha transparency value for the points (0 = TRUEransparent, 1 = opaque)
 #' @param circle          draw a correlation circle? (only applies when prcomp was called with scale = TRUE and when var.scale = 1)
+#' @param circle.prob     size of the correlation circle as 
 #' @param var.axes        draw arrows for the variables?
 #' @param varname.size    size of the text for variable names
 #' @param varname.abbrev  whether or not to abbreviate the variable names
 #'
 #' @return                a ggplot2 plot
+#' @importFrom stats qchisq median predict
 #' @export
 #' @examples
 #'   data(wine)
 #'   wine.pca <- prcomp(wine, scale. = TRUE)
-#'   print(ggbiplot(wine.pca, obs.scale = 1, var.scale = 1, groups = wine.class, ellipse = TRUE, circle = TRUE))
+#'   print(ggbiplot(wine.pca, obs.scale = 1, var.scale = 1, 
+#'                  groups = wine.class, ellipse = TRUE, circle = TRUE))
 #'
 ggbiplot <- function(pcobj, choices = 1:2, scale = 1, pc.biplot = TRUE, 
                       groups = NULL, ellipse = FALSE, ellipse.prob = 0.68, 
@@ -59,6 +65,9 @@ ggbiplot <- function(pcobj, choices = 1:2, scale = 1, pc.biplot = TRUE,
 
   u <- if(pc.biplot) sqrt(nrow(df)) * df[, choices] else df[, choices]
   v <- attr(df, "basis")[, choices]
+
+  # shut-up no visible binding ...
+  utils::globalVariables(c("x", "y", "name", "label", "group"))
 
   names(u) <- c('x', 'y')
   names(v) <- c('x', 'y')

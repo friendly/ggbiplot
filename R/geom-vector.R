@@ -35,7 +35,11 @@ GeomVector <- ggplot2::ggproto(ggplot2:::Geom, expr={
 
 #' Arrows
 #'
-#' @param arrow specification for arrow heads, as created by arrow()
+#' @param mapping  Aesthetic mappings, inherited
+#' @param data     The data to be displayed in this layer; by default data is inherited from the plot data
+#' @param stat     The statistical transformation to use on the data for this layer, as a string
+#' @param position Position adjustment, either as a string, or the result of a call to a position adjustment function.
+#' @param arrow    specification for arrow heads, as created by arrow()
 #' @export
 geom_vector <- function (mapping = NULL, data = NULL, stat = "identity",
   position = "identity", arrow = grid::arrow(length = unit(1/3, "picas")), ...) {

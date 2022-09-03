@@ -16,6 +16,8 @@ Imports:
     scales
 Enhances:
     FactoMineR, MASS
+Encoding: UTF-8
+Language: en-US
 License: GPL-2
 URL: http://github.com/vqv/ggbiplot
 RoxygenNote: 7.2.1

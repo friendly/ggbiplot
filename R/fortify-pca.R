@@ -74,6 +74,7 @@ fortify.princomp <- function(model, data = NULL, scale = 0, equalize = scale != 
 #' @rdname fortify-pca
 #' @export
 fortify.PCA <- function(model, data = NULL, scale = 0, equalize = scale != 0, ...) {
+  pcobj <- model     ## Is this a kludge?
   scores <- data.frame(pcobj$ind$coord)
   loadings <- data.frame(pcobj$var$coord)
   sdev <- sqrt(pcobj$eig[1:ncol(pcobj$var$coord), 1])

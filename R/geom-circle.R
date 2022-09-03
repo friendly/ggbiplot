@@ -50,7 +50,10 @@ GeomCircle <- ggplot2::ggproto(ggplot2:::Geom, expr={
 
 #' Circles specified by position and radius
 #'
-#' @param arrow specification for arrow heads, as created by arrow()
+#' @param mapping  Aesthetic mappings, inherited
+#' @param data     The data to be displayed in this layer; by default data is inherited from the plot data
+#' @param stat     The statistical transformation to use on the data for this layer, as a string
+#' @param position Position adjustment, either as a string, or the result of a call to a position adjustment function.
 #' @export
 geom_circle <- function (mapping = NULL, data = NULL, stat = "identity",
   position = "identity", ...) {

@@ -42,6 +42,7 @@ ggscreeplot <- function(pcobj, type = c('pev', 'cev'))
 
   df <- data.frame(PC = 1:length(d), yvar = yvar)
 
+  # FIXME: what is PC ???
   ggplot(data = df, aes(x = PC, y = yvar)) + 
     xlab('principal component number') + ylab(yvar.lab) +
     geom_point() + geom_path()
