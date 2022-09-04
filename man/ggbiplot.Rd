@@ -54,6 +54,8 @@ ggbiplot(
 \item{varname.size}{size of the text for variable names}
 
 \item{varname.abbrev}{whether or not to abbreviate the variable names}
+
+\item{...}{Other arguments passed down}
 }
 \value{
 a ggplot2 plot

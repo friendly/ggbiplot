@@ -54,6 +54,7 @@ GeomAxis <- ggplot2::ggproto(ggplot2:::Geom, expr={
 #' @param stat     The statistical transformation to use on the data for this layer, as a string
 #' @param position Position adjustment, either as a string, or the result of a call to a position adjustment function.
 #' @param arrow    specification for arrow heads, as created by arrow()
+#' @param ...      Other arguments passed down
 #' @export
 geom_axis <- function (mapping = NULL, data = NULL, stat = "identity",
   position = "identity", arrow = grid::arrow(length = unit(1/3, "picas")), 

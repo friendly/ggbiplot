@@ -38,6 +38,7 @@
 #' @param var.axes        draw arrows for the variables?
 #' @param varname.size    size of the text for variable names
 #' @param varname.abbrev  whether or not to abbreviate the variable names
+#' @param ...      Other arguments passed down
 #'
 #' @return                a ggplot2 plot
 #' @importFrom stats qchisq median predict

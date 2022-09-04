@@ -54,6 +54,7 @@ GeomCircle <- ggplot2::ggproto(ggplot2:::Geom, expr={
 #' @param data     The data to be displayed in this layer; by default data is inherited from the plot data
 #' @param stat     The statistical transformation to use on the data for this layer, as a string
 #' @param position Position adjustment, either as a string, or the result of a call to a position adjustment function.
+#' @param ...      Other arguments passed down
 #' @export
 geom_circle <- function (mapping = NULL, data = NULL, stat = "identity",
   position = "identity", ...) {

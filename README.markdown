@@ -34,6 +34,7 @@ m <- prcomp(wine, scale = TRUE)
 
 ### Basic principal components score plot
 ```R
+library(ggplot2)
 qplot(PC1, PC2, data = fortify(m), color = cultivar)
 ```
 
@@ -46,10 +47,10 @@ qplot(PC1, PC2, data = fortify(m), color = cultivar) +
 ### Basic principal components biplot
 ```R
 df <- fortify(m)
-g <- ggplot(df, aes(x = PC1, PC2)) + 
-  geom_point(aes(color = cultivar)) +
-  geom_axis(data = attr(df, "basis"), aes(label = .name))
-print(g)
+ggplot(df, aes(x = PC1, PC2)) + 
+  geom_point(aes(color = cultivar)) 
+#  geom_axis(data = attr(df, "basis"), aes(label = .name))
+
 ```
 In this example, the fortified object has to be stored because we need 
 access to two different data frames: one containing the scores and one containing the loadings.  By default `fortify()` does not scale the 
@@ -65,7 +66,7 @@ are on the **same scale**.
 df <- fortify(m, scale = 1, equalize = FALSE)
 g <- ggplot(df, aes(x = PC1, PC2)) + 
   geom_point(aes(color = cultivar)) +
-  geom_axis(data = attr(df, "basis"), aes(label = .name)) + 
+#  geom_axis(data = attr(df, "basis"), aes(label = .name)) + 
   annotate("circle", x = 0, y = 0, radius = 1, alpha = 1/4)
 print(g)
 ```

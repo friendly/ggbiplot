@@ -1,7 +1,7 @@
 Package: ggbiplot
 Type: Package
 Title: A ggplot2 based biplot
-Version: 0.55
+Version: 0.6.0
 Date: 2011-10-23
 Author: Vincent Q. Vu <vqv@stat.osu.edu>
 Maintainer: Vincent Q. Vu <vqv@stat.osu.edu>

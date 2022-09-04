@@ -23,6 +23,8 @@ geom_vector(
 \item{position}{Position adjustment, either as a string, or the result of a call to a position adjustment function.}
 
 \item{arrow}{specification for arrow heads, as created by arrow()}
+
+\item{...}{Other arguments passed down}
 }
 \description{
 Arrows
