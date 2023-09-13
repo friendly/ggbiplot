@@ -68,7 +68,8 @@ ggbiplot <- function(pcobj, choices = 1:2, scale = 1, pc.biplot = TRUE,
   v <- attr(df, "basis")[, choices]
 
   # shut-up no visible binding ...
-  utils::globalVariables(c("x", "y", "name", "label", "group"))
+  # utils::globalVariables(c("x", "y", "name", "label", "group"))
+  group <- label <- name <- x <- xbegin <- y <- ybegin <- NULL
 
   names(u) <- c('x', 'y')
   names(v) <- c('x', 'y')
