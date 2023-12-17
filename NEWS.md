@@ -3,6 +3,7 @@
 - `reflect()` now also reflects supplementary variables from `FactoMineR::PCA()`
 - added support for `ade4::dudi.pca()`
 - `ggbiplot()` gains an `axis.title` argument
+- `ggscreeplot()` gains `color`, `shape`, `linetype` and `linewidth` arguments
 
 ## Version 0.6.1
 
