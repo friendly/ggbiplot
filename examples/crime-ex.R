@@ -21,8 +21,8 @@ crime.pca <-
 biplot(crime.pca)
 
 # reflect dims 1:2
-crime.pca$rotation[,1:2] <- -1 * crime.pca$rotation[,1:2]
-crime.pca$x[,1:2] <- -1 * crime.pca$x[,1:2]
+# crime.pca$rotation[,1:2] <- -1 * crime.pca$rotation[,1:2]
+# crime.pca$x[,1:2] <- -1 * crime.pca$x[,1:2]
 
 crime.pca <- reflect(crime.pca)
 
