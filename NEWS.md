@@ -5,6 +5,7 @@
 - added support for `ade4::dudi.pca()`
 - `ggbiplot()` gains an `axis.title` argument
 - `ggscreeplot()` gains `color`, `shape`, `linetype` and `linewidth` arguments
+- Added `get_SVD()` intended the simplify the interface to various PCA functions.
 
 ## Version 0.6.1
 
