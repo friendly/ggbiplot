@@ -33,10 +33,20 @@ knitr::opts_chunk$set(
 )
 
 options(digits = 3)
+
+# find the current git branch
+# from: https://gist.github.com/hadley/3427128
+# kludge because find_git() not available
+git_branch <- function() {
+  # git <- "C:/Program Files/Git/bin/git.exe"
+  git <- Sys.which("git")
+  system2(git, "symbolic-ref --short -q HEAD", stdout = TRUE, stderr = FALSE)
+}
+
 ```
 
 # ggbiplot <img src="man/figures/logo.png" height="200" style="float:right; height:200px;"/>
-**Version** `r packageVersion("ggbiplot")`
+**Version** `r packageVersion("ggbiplot")` ( `r git_branch()` branch )
 
 This package provides a `ggplot2` implementation of the biplot, a simultaneous
 plot of scores for observations and vectors for variables for principal component-like analyses.  
