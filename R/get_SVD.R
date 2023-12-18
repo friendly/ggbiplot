@@ -3,7 +3,7 @@
 #' @description
 #' 
 #' Biplots are based on the Singular Value Decomposition, which for a data matrix is
-#' \deqn{\mathbf{X} = \mathbf{U} \mathbf{D} \mathbf{V}^T}
+#' \deqn{\mathbf{X} / \sqrt{n} = \mathbf{U} \mathbf{D} \mathbf{V}^T}
 #' but these are computed and returned in quite different
 #' forms by various PCA-like methods. This function provides a common interface, returning
 #' the components with standard names.
@@ -16,7 +16,7 @@
 #'   \describe{
 #'     \item{n}{The sample size on which the analysis was based}
 #'     \item{U}{Left singular vectors, giving observation scores}
-#'     \item{D}{vector of singular values, which are also the square roots
+#'     \item{D}{vector of singular values, the diagonal elements of the matrix \eqn{\mathbf{D}}, which are also the square roots
 #'         of the eigenvalues of \eqn{\mathbf{X} \mathbf{X}'}}
 #'     \item{V}{Right singular vectors, giving variable loadings}
 #'   }
