@@ -226,7 +226,7 @@ ggbiplot <- function(pcobj,
       d <- pcobj$svd
       u <- predict(pcobj)$x/nobs.factor
       v <- pcobj$scaling
-      d.total <- sum(d^2)
+#      d.total <- sum(d^2)
   } else if(inherits(pcobj, 'pca') & inherits(pcobj, 'dudi')){
       nobs.factor <- sqrt(nrow(pcobj$tab))
       d <- sqrt(pcobj$eig)

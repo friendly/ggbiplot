@@ -1,5 +1,6 @@
 ## Version 0.6.2
 
+- corrected small bugs in `ggbiplot() and `ggscreeplot()`
 - `reflect()` now also reflects supplementary variables from `FactoMineR::PCA()`
 - added support for `ade4::dudi.pca()`
 - `ggbiplot()` gains an `axis.title` argument
