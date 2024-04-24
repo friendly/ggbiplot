@@ -274,7 +274,7 @@ ggbiplot <- function(pcobj,
 
   # Change the title labels for the axes
   if(obs.scale == 0) {
-    u.axis.labs <- paste('standardized', axis.title, choices, sep='')
+    u.axis.labs <- paste('standardized ', axis.title, choices, sep='')
   } else {
     u.axis.labs <- paste(axis.title, choices, sep='')
   }

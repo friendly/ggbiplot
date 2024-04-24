@@ -1,3 +1,7 @@
+## Version 0.6.3
+
+- Fix axis label spacing
+
 ## Version 0.6.2
 
 This is a modest upgrade to the initial release, adding a number of features.
