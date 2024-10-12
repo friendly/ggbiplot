@@ -116,6 +116,7 @@
 #' @param varname.adjust  Adjustment factor the placement of the variable names, >= 1 means farther from the arrow
 #' @param varname.abbrev  logical; whether or not to abbreviate the variable names, using \code{\link{abbreviate}}.
 #' @param axis.title      character; the prefix used as the axis labels. Default: \code{"PC"}.
+#' @param clip            should geoms be clipped at the axis limits? Default: "on"
 #' @param ...             other arguments passed down
 #'
 #' @import     ggplot2
@@ -197,11 +198,12 @@ ggbiplot <- function(pcobj,
                      varname.color = "black",
                      varname.abbrev = FALSE,
                      axis.title = "PC",
+                     clip = "on",
                      ...)
 {
 
   if(length(choices) > 2) {
-    warning("choices = ", choices, " is not of length 2. Only the first 2 will be used")
+    warning("choices = ", choices, " of length", length(choices), " not of length 2. Only the first 2 will be used")
     choices <- choices[1:2]
   }
 
@@ -309,7 +311,7 @@ ggbiplot <- function(pcobj,
   g <- ggplot(data = df.u, aes(x = xvar, y = yvar)) + 
           xlab(u.axis.labs[1]) + 
           ylab(u.axis.labs[2]) + 
-          coord_equal()
+          coord_equal(clip = clip)
 
   # Draw either labels or points
   if(!is.null(df.u$labels)) {

@@ -1,6 +1,7 @@
 ## Version 0.6.3
 
 - Fix axis label spacing
+- `ggbiplot` gains a `clip` argument to control if points, labels, etc. are clipped to the axis limits.
 
 ## Version 0.6.2
 

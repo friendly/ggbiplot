@@ -40,6 +40,7 @@ Produces scree plots (Cattell, 1966) of the variance proportions explained by ea
 various PCA-like dimension reduction techniques.
 }
 \examples{
+library(ggplot2)
 data(wine)
 wine.pca <- prcomp(wine, scale. = TRUE)
 ggscreeplot(wine.pca)

@@ -30,6 +30,7 @@ ggbiplot(
   varname.color = "black",
   varname.abbrev = FALSE,
   axis.title = "PC",
+  clip = "on",
   ...
 )
 }
@@ -97,6 +98,8 @@ of the dataset.}
 \item{varname.abbrev}{logical; whether or not to abbreviate the variable names, using \code{\link{abbreviate}}.}
 
 \item{axis.title}{character; the prefix used as the axis labels. Default: \code{"PC"}.}
+
+\item{clip}{should geoms be clipped at the axis limits? Default: "on"}
 
 \item{...}{other arguments passed down}
 }

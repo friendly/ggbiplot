@@ -33,5 +33,5 @@ Encoding: UTF-8
 Language: en-US
 URL: https://github.com/friendly/ggbiplot, https://friendly.github.io/ggbiplot/
 BugReports: https://github.com/friendly/ggbiplot/issues
-RoxygenNote: 7.2.3
+RoxygenNote: 7.3.2
 LazyData: true
