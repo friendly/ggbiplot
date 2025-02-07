@@ -1,3 +1,10 @@
+## Version 0.6.4
+
+- Documented solution to 'scale_color_discrete() produces two legends' #2
+- Fix glitch with axis labels
+- `ggbiplot` gains `geom.ind` and `geom.var` arguments for more flexlible handling of the geometries used to display the
+observation points and variable labels.
+
 ## Version 0.6.3
 
 - Fix axis label spacing

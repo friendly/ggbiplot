@@ -77,6 +77,21 @@
 #' values is assigned, contains the so-called \emph{standard coordinates} and have sum of squared
 #' values equal to 1.0. 
 #' 
+#' \bold{Scales and legend}
+#' 
+#' When the `groups` argument is not \code{NULL}, the function uses that value to set the aesthetics for `color`, `fill` and `shape`.
+#' If you override the defaults using \code{scale_color_discrete}, etc., you may find that duplicate legends are produced.
+#' To avoid this, you need to have the same name for aesthetics to be merged in the legend, for example,
+#' \preformatted{
+#' scale_fill_discrete(name = 'Species') 
+#' scale_color_discrete(name = 'Species')
+#' }
+#' or,
+#' \preformatted{
+#' labs(fill = "Species", color = "Species")
+#' }
+#' 
+#' 
 #' @param pcobj           an object returned by \code{\link[stats]{prcomp}}, \code{\link[stats]{princomp}}, 
 #'                        \code{\link[FactoMineR]{PCA}}, \code{\link[ade4]{dudi.pca}}, or \code{\link[MASS]{lda}}
 #' @param choices         Which components to plot? An integer vector of length 2.
@@ -97,6 +112,12 @@
 #' @param groups          Optional factor variable indicating the groups that the observations belong to. 
 #'                        If provided the points will be colored according to groups and this allows data ellipses also
 #'                        to be drawn when \code{ellipse = TRUE}.
+#' @param geom.ind        a text specifying the geometry to be used for the observations. Allowed 
+#'                        values are among \code{c("point", "text")}. Use 
+#'                        \code{"point"} (to show only points); \code{"text"} to show only labels; 
+#'                        \code{c("point", "text")}  to show both. 
+#' @param geom.var        a text specifying the geometry to be used for the variables. Allowed 
+#'                        values are among \code{c("arrow", "text")}. Use 
 #' @param point.size      Size of observation points.
 #' @param ellipse         Logical; draw a normal data ellipse for each group?
 #' @param ellipse.prob    Coverage size of the data ellipse in Normal probability
@@ -131,7 +152,7 @@
 #'   \code{\link[stats]{biplot}} for the original stats package version;
 #'   \code{\link[factoextra]{fviz_pca_biplot}} for the factoextra package version.
 #' 
-#' @author Vincent Q. Vu.
+#' @author Vincent Q. Vu., Michael Friendly
 #' @references 
 #'   Gabriel, K. R. (1971). The biplot graphical display of matrices with application to principal component analysis. 
 #'   \emph{Biometrika}, \bold{58}, 453–467. \doi{10.2307/2334381}.
@@ -181,6 +202,8 @@ ggbiplot <- function(pcobj,
                      var.scale = scale, 
                      var.factor = 1,    # MF
                      groups = NULL, 
+                     geom.ind = "point",
+                     geom.var = c("arrow", "text"),
                      point.size = 1.5,
                      ellipse = FALSE, 
                      ellipse.prob = 0.68, 
@@ -276,9 +299,9 @@ ggbiplot <- function(pcobj,
 
   # Change the title labels for the axes
   if(obs.scale == 0) {
-    u.axis.labs <- paste('standardized ', axis.title, choices, sep='')
+    u.axis.labs <- paste0('standardized ', axis.title, choices)
   } else {
-    u.axis.labs <- paste(axis.title, choices, sep='')
+    u.axis.labs <- paste0(axis.title, choices)
   }
 
   # Append the proportion of explained variance to the axis labels
@@ -314,18 +337,37 @@ ggbiplot <- function(pcobj,
           coord_equal(clip = clip)
 
   # Draw either labels or points
-  if(!is.null(df.u$labels)) {
+  # if(!is.null(df.u$labels)) {
+  #   if(!is.null(df.u$groups)) {
+  #     g <- g + geom_text(aes(label = labels, color = groups), 
+  #                        size = labels.size)
+  #   } else {
+  #     g <- g + geom_text(aes(label = labels), size = labels.size)      
+  #   }
+  # } else {
+  #   if(!is.null(df.u$groups)) {
+  #     g <- g + geom_point(aes(color = groups), alpha = alpha, size = point.size)
+  #   } else {
+  #     g <- g + geom_point(alpha = alpha, size = point.size)      
+  #   }
+  # }
+  
+  # Allow to use points and/or labels
+  if("point" %in% geom.ind) {
     if(!is.null(df.u$groups)) {
-      g <- g + geom_text(aes(label = labels, color = groups), 
-                         size = labels.size)
-    } else {
-      g <- g + geom_text(aes(label = labels), size = labels.size)      
-    }
-  } else {
-    if(!is.null(df.u$groups)) {
-      g <- g + geom_point(aes(color = groups), alpha = alpha, size = point.size)
+      g <- g + geom_point(aes(color = groups, shape = groups), 
+                          alpha = alpha, size = point.size)
     } else {
       g <- g + geom_point(alpha = alpha, size = point.size)      
+    }
+  }
+  if("text" %in% geom.ind) {
+    if(!is.null(df.u$groups)) {
+      g <- g + geom_text(aes(label = labels, color = groups), 
+                         size = labels.size, vjust = 0.5)
+    } else {
+      g <- g + geom_text(aes(label = labels), 
+                         size = labels.size, vjust = 0.5)      
     }
   }
   
