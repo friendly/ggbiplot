@@ -118,6 +118,8 @@
 #'                        \code{c("point", "text")}  to show both. 
 #' @param geom.var        a text specifying the geometry to be used for the variables. Allowed 
 #'                        values are among \code{c("arrow", "text")}. Use 
+#'                        \code{"arrow"} (to show only vectors); \code{"text"} to show only labels; 
+#'                        \code{c("arrow", "text")}  to show both. 
 #' @param point.size      Size of observation points.
 #' @param ellipse         Logical; draw a normal data ellipse for each group?
 #' @param ellipse.prob    Coverage size of the data ellipse in Normal probability
@@ -364,10 +366,10 @@ ggbiplot <- function(pcobj,
   if("text" %in% geom.ind) {
     if(!is.null(df.u$groups)) {
       g <- g + geom_text(aes(label = labels, color = groups), 
-                         size = labels.size, vjust = 0.5)
+                         size = labels.size, vjust = -0.5)
     } else {
       g <- g + geom_text(aes(label = labels), 
-                         size = labels.size, vjust = 0.5)      
+                         size = labels.size, vjust = -0.5)      
     }
   }
   
@@ -383,6 +385,7 @@ ggbiplot <- function(pcobj,
     }
 
     # Draw directions
+    if("arrow" %in% geom.var) {
     arrow_style <- arrow(length = unit(1/2, 'picas'), type="closed", angle=15) 
     g <- g +
       geom_segment(data = df.v,
@@ -390,6 +393,7 @@ ggbiplot <- function(pcobj,
                    arrow = arrow_style, 
                    color = varname.color,
                    linewidth = 1.4)    # MR: was 1.2
+    }
   }
 
   # Overlay a concentration ellipse if there are groups
@@ -397,46 +401,7 @@ ggbiplot <- function(pcobj,
     theta <- c(seq(-pi, pi, length = 50), seq(pi, -pi, length = 50))
     circle <- cbind(cos(theta), sin(theta))
 
-    # ell <- ddply(df.u, 'groups', function(x) {
-    #   if(nrow(x) <= 2) {
-    #     return(NULL)
-    #   }
-    #   sigma <- var(cbind(x$xvar, x$yvar))
-    #   mu <- c(mean(x$xvar), mean(x$yvar))
-    #   ed <- sqrt(qchisq(ellipse.prob, df = 2))
-    #   data.frame(sweep(circle %*% chol(sigma) * ed, 2, mu, FUN = '+'), 
-    #              groups = x$groups[1])
-    # })
-    # names(ell)[1:2] <- c('xvar', 'yvar')
 
-    # ell <- 
-    #   df.u |>
-    #   group_by(groups) |>
-    #   filter(n() > 2) |>
-    #   summarize(
-    #     sigma = list(var(cbind(xvar, yvar))),
-    #     mu = list(c(mean(xvar), mean(yvar))),
-    #     ed = sqrt(qchisq(ellipse.prob, df = 2)),
-    #     circle_chol = list(circle %*% chol(sigma[[1]]) * ed),
-    #     ell = list(sweep(circle_chol[[1]], 2, mu[[1]], FUN = "+")),
-    #     xvar = map(ell, ~.x[,1]),
-    #     yvar = map(ell, ~.x[,2]),
-    #     .groups = "drop"
-    #   ) |> 
-    #   dplyr::select(xvar, yvar, groups) |> 
-    #   tidyr::unnest(c(xvar, yvar))
-
-    # g <- g + geom_path(data = ell, 
-    #                    aes(color = groups, 
-    #                        group = groups),
-    #                    linewidth = ellipse.linewidth)
-    # g <- g + geom_polygon(data = ell, 
-    #                       aes(color = groups, 
-    #                           fill = groups
-    #                         #  group = groups
-    #                           ),
-    #                       alpha = 0.4,    # MF: why doesn't this have any effect?
-    #                       linewidth = ellipse.linewidth)
 
     # Overlay a concentration ellipse if there are groups
       geom <- if(isTRUE(ellipse.fill)) "polygon" else "path"
@@ -460,7 +425,7 @@ ggbiplot <- function(pcobj,
   }
 
   # Label the variable axes
-  if(var.axes) {
+  if(var.axes & "text" %in% geom.var) {
     g <- g + 
     geom_text(data = df.v, 
               aes(label = varname, x = xvar, y = yvar, 

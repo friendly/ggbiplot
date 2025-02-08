@@ -71,7 +71,9 @@ values are among \code{c("point", "text")}. Use
 \code{c("point", "text")}  to show both.}
 
 \item{geom.var}{a text specifying the geometry to be used for the variables. Allowed 
-values are among \code{c("arrow", "text")}. Use}
+values are among \code{c("arrow", "text")}. Use 
+\code{"arrow"} (to show only vectors); \code{"text"} to show only labels; 
+\code{c("arrow", "text")}  to show both.}
 
 \item{point.size}{Size of observation points.}
 
