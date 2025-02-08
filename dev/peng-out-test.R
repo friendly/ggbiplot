@@ -62,6 +62,31 @@ ggbiplot(peng.pca, # obs.scale = 1, var.scale = 1,
   scale_shape_discrete() +
   theme(legend.direction = 'horizontal', legend.position = 'top') 
 
+#------------------------------------
+# try adjusting variable names to fold
+
+vn <- rownames(peng.pca$rotation)
+vn <- gsub("_", "\n", vn)
+rownames(peng.pca$rotation) <- vn
+
+ggbiplot(peng.pca, # obs.scale = 1, var.scale = 1,
+         choices = 1:2,
+         groups = peng$species, 
+         ellipse = TRUE, ellipse.alpha = 0.1,
+         circle = TRUE,
+         var.factor = 1,
+         geom.ind = c("point", "text"),
+         point.size = 1,
+         labels = lab, labels.size = 6,
+         varname.size = 5,
+         clip = "off") +
+  theme_minimal(base_size = 14) +
+  theme_penguins("dark") +
+  scale_shape_discrete() +
+  theme(legend.direction = 'horizontal', legend.position = 'top') 
+
+
+
 
 fviz_pca_biplot(
   peng.pca,

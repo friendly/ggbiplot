@@ -322,11 +322,11 @@ ggbiplot <- function(pcobj,
   }
 
   # Variable Names
-  if(varname.abbrev) {
-    df.v$varname <- abbreviate(rownames(v))
-  } else {
-    df.v$varname <- rownames(v)
+  vn <- rownames(v)
+  if(is.logical(varname.abbrev) & isTRUE(varname.abbrev)) {
+    vn <- abbreviate(vn)
   }
+  df.v$varname <- vn
 
   # Variables for text label placement
   df.v$angle <- with(df.v, (180/pi) * atan(yvar / xvar))
