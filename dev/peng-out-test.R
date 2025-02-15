@@ -29,12 +29,13 @@ col <- c("#F37A00, #6A3D9A, #33a02c") # pengion.colors("dark")
 # options(ggplot2.discrete.fill = col,
 #         ggplot2.discrete.color = col)
 
-ggbiplot(peng.pca, # obs.scale = 1, var.scale = 1,
+#remotes::install_github("friendly/ggbiplot", ref = "geoms")
+ggbiplot(peng.pca, 
          choices = 3:4,
          groups = peng$species, 
          ellipse = TRUE, ellipse.alpha = 0.1,
          circle = TRUE,
-         var.factor = 2.5,
+         var.factor = 4.5,
          geom.ind = c("point", "text"),
          point.size = 2,
          labels = lab, labels.size = 6,
@@ -42,11 +43,10 @@ ggbiplot(peng.pca, # obs.scale = 1, var.scale = 1,
          clip = "off") +
   theme_minimal(base_size = 14) +
   theme_penguins("dark") +
-#  theme_penguins(name = "Species") +
   theme(legend.direction = 'horizontal', legend.position = 'top') 
 
 # first two dims
-ggbiplot(peng.pca, # obs.scale = 1, var.scale = 1,
+ggbiplot(peng.pca, 
          choices = 1:2,
          groups = peng$species, 
          ellipse = TRUE, ellipse.alpha = 0.1,
@@ -63,8 +63,7 @@ ggbiplot(peng.pca, # obs.scale = 1, var.scale = 1,
   theme(legend.direction = 'horizontal', legend.position = 'top') 
 
 #------------------------------------
-# try adjusting variable names to fold
-
+# adjust variable names to fold at '_'
 vn <- rownames(peng.pca$rotation)
 vn <- gsub("_", "\n", vn)
 rownames(peng.pca$rotation) <- vn
@@ -99,4 +98,23 @@ fviz_pca_biplot(
 ) +
   theme(legend.position = "top")
 
-
+# from 
+label <- lab
+fviz_pca_biplot(
+  peng.pca,
+  axes = 3:4,
+  habillage = peng$species,
+  addEllipses = TRUE,
+  ellipse.level = 0.68,
+#  label = "none",
+  # palette = peng.colors("dark"),
+  arrowsize = 1.5,
+  col.var = "black",
+) +
+  geom_text(
+    data = ~ dplyr::bind_cols(., label),
+    aes(label = label),
+    vjust = 0,
+    nudge_y = .05
+  ) +
+  theme(legend.position = "top")

@@ -365,7 +365,9 @@ ggbiplot <- function(pcobj,
   }
   if("text" %in% geom.ind) {
     if(!is.null(df.u$groups)) {
-      g <- g + geom_text(aes(label = labels, color = groups), 
+      # g <- g + geom_text(aes(label = labels, color = groups),
+      #                    size = labels.size, vjust = -0.5)
+      g <- g + geom_text(aes(label = labels),
                          size = labels.size, vjust = -0.5)
     } else {
       g <- g + geom_text(aes(label = labels), 
@@ -430,7 +432,7 @@ ggbiplot <- function(pcobj,
     geom_text(data = df.v, 
               aes(label = varname, x = xvar, y = yvar, 
                   angle = angle, hjust = hjust), 
-              color = varname.color, size = varname.size)
+              color = varname.color, size = varname.size, lineheight = 0.75)
   }
   # Change the name of the legend for groups
   # if(!is.null(groups)) {
