@@ -22,7 +22,8 @@ names(wine.rpca)
 class(wine.rpca)
 # list
 
-diagPlot(wine.rpca)
+col <- c("red", "green", "blue")[wine.class]
+diagPlot(wine.rpca, col = col)
 
 wine.rpca$loadings
 

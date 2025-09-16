@@ -40,6 +40,13 @@ crime.pca <-
  
  crime.pca <- reflect(crime.pca)  # reflect columns 1:2
  biplot(crime.pca)
+ 
+ iris.lda <- MASS::lda(Species ~ ., data=iris)
+ #reflect the first dimension
+ iris.lda1 <- reflect(iris.lda, columns = 1)
+ # compare predicted scores
+ predict(iris.lda)$x |> head()
+ predict(iris.lda1)$x |> head()
 }
 \seealso{
 \code{\link[stats]{prcomp}},  \code{\link[stats]{princomp}}, 

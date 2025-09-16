@@ -1,3 +1,8 @@
+## Version 0.6.5
+
+- Now Depends R (>= 4.1.0) to handle |>
+- Added lda() objects to those handled by reflect()
+
 ## Version 0.6.4
 
 - Documented solution to 'scale_color_discrete() produces two legends' #2

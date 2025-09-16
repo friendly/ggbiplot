@@ -1,8 +1,8 @@
 Package: ggbiplot
 Type: Package
 Title: A Grammar of Graphics Implementation of Biplots
-Version: 0.6.4
-Date: 2025-02-07
+Version: 0.6.5
+Date: 2025-09-16
 Authors@R: c(
     person(c("Vincent", "Q."), "Vu", , "vqv@stat.osu.edu", role = c("aut"),
             comment = c(ORCID = "0000-0002-4689-0497")),
@@ -18,7 +18,7 @@ Description: A 'ggplot2' based implementation of biplots, giving a representatio
     biplot and scree plot methods which can be used with the results of prcomp(), princomp(),
     FactoMineR::PCA(), ade4::dudi.pca() or MASS::lda() and can be customized using 'ggplot2' techniques.
 Depends: 
-    R (>= 3.5.0),
+    R (>= 4.1.0),
     ggplot2
 Imports:
     scales

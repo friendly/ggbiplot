@@ -34,6 +34,13 @@
 #'  
 #'  crime.pca <- reflect(crime.pca)  # reflect columns 1:2
 #'  biplot(crime.pca)
+#'  
+#'  iris.lda <- MASS::lda(Species ~ ., data=iris)
+#'  #reflect the first dimension
+#'  iris.lda1 <- reflect(iris.lda, columns = 1)
+#'  # compare predicted scores
+#'  predict(iris.lda)$x |> head()
+#'  predict(iris.lda1)$x |> head()
 
 reflect <- function(pcobj, columns = 1:2){
 
@@ -60,11 +67,10 @@ reflect <- function(pcobj, columns = 1:2){
     if ("quanti.sup" %in% names(pcobj)) pcobj$quanti.sup$coord[, columns] <- -1 * pcobj$quanti.sup$coord[, columns]
   } 
   else if(inherits(pcobj, "lda")) {
-    warning("Can't reflect an 'lda' object")               # Why not???
-  #   u <- predict(pcobj)$x
-  #   check(u, columns)
-  #   pcobj$scaling[, columns] <- -1 * pcobj$scaling[, columns]
-  #   pcobj$x[, columns]       <- -1 * pcobj$x[, columns]
+ #   lda objects don't have a scores (x) component. They come from predict()
+    u <- predict(pcobj)$x
+    check(u, columns)
+    pcobj$scaling[, columns] <- -1 * pcobj$scaling[, columns]
   }
   else {
     stop('Expected a object of class "prcomp", "princomp", "PCA", or "lda"')
