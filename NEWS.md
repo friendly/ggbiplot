@@ -2,6 +2,7 @@
 
 - Now Depends R (>= 4.1.0) to handle |>
 - Added lda() objects to those handled by reflect()
+- Illustrate reflection in ggbiplot examples
 
 ## Version 0.6.4
 

@@ -212,6 +212,22 @@ ggbiplot(wine.pca,
          varname.size = 4,
          groups = wine.class, 
          ellipse = TRUE, circle = TRUE)
+ 
+    # Easier interpretation if the axes are reflected
+wine.pca <- reflect(wine.pca)
+    # Use direct labels rather than a legend
+means <- aggregate(cbind(PC1, PC2) ~ wine.class,
+    data = wine.pca$x, FUN = mean)
+
+ggbiplot(wine.pca, 
+         obs.scale = 1, var.scale = 1,
+         groups = wine.class, 
+         varname.size = 4,
+         ellipse = TRUE, 
+         circle = TRUE) +
+  geom_label(data = means, aes(x=PC1, y=PC2, label = wine.class)) +
+  theme(legend.position = 'none')
+
 
 data(iris)
 iris.pca <- prcomp (~ Sepal.Length + Sepal.Width + Petal.Length + Petal.Width,
