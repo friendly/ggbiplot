@@ -13,6 +13,8 @@ ggbiplot(
   var.scale = scale,
   var.factor = 1,
   groups = NULL,
+  geom.ind = "point",
+  geom.var = c("arrow", "text"),
   point.size = 1.5,
   ellipse = FALSE,
   ellipse.prob = 0.68,
@@ -62,6 +64,16 @@ Mahalanobis distance.}
 \item{groups}{Optional factor variable indicating the groups that the observations belong to. 
 If provided the points will be colored according to groups and this allows data ellipses also
 to be drawn when \code{ellipse = TRUE}.}
+
+\item{geom.ind}{a text specifying the geometry to be used for the observations. Allowed 
+values are among \code{c("point", "text")}. Use 
+\code{"point"} (to show only points); \code{"text"} to show only labels; 
+\code{c("point", "text")}  to show both.}
+
+\item{geom.var}{a text specifying the geometry to be used for the variables. Allowed 
+values are among \code{c("arrow", "text")}. Use 
+\code{"arrow"} (to show only vectors); \code{"text"} to show only labels; 
+\code{c("arrow", "text")}  to show both.}
 
 \item{point.size}{Size of observation points.}
 
@@ -175,7 +187,21 @@ coordinates are called \emph{principal coordinates} and the sum of squared coord
 on each dimension equal the corresponding singular value.
 The other matrix, to which no part of the singular 
 values is assigned, contains the so-called \emph{standard coordinates} and have sum of squared
-values equal to 1.0.
+values equal to 1.0. 
+
+\bold{Scales and legend}
+
+When the `groups` argument is not \code{NULL}, the function uses that value to set the aesthetics for `color`, `fill` and `shape`.
+If you override the defaults using \code{scale_color_discrete}, etc., you may find that duplicate legends are produced.
+To avoid this, you need to have the same name for aesthetics to be merged in the legend, for example,
+\preformatted{
+scale_fill_discrete(name = 'Species') 
+scale_color_discrete(name = 'Species')
+}
+or,
+\preformatted{
+labs(fill = "Species", color = "Species")
+}
 }
 \examples{
 data(wine)
@@ -186,6 +212,22 @@ ggbiplot(wine.pca,
          varname.size = 4,
          groups = wine.class, 
          ellipse = TRUE, circle = TRUE)
+ 
+    # Easier interpretation if the axes are reflected
+wine.pca <- reflect(wine.pca)
+    # Use direct labels rather than a legend
+means <- aggregate(cbind(PC1, PC2) ~ wine.class,
+    data = wine.pca$x, FUN = mean)
+
+ggbiplot(wine.pca, 
+         obs.scale = 1, var.scale = 1,
+         groups = wine.class, 
+         varname.size = 4,
+         ellipse = TRUE, 
+         circle = TRUE) +
+  geom_label(data = means, aes(x=PC1, y=PC2, label = wine.class)) +
+  theme(legend.position = 'none')
+
 
 data(iris)
 iris.pca <- prcomp (~ Sepal.Length + Sepal.Width + Petal.Length + Petal.Width,
@@ -222,5 +264,5 @@ Gabriel, K. R. (1971). The biplot graphical display of matrices with application
   \code{\link[factoextra]{fviz_pca_biplot}} for the factoextra package version.
 }
 \author{
-Vincent Q. Vu.
+Vincent Q. Vu., Michael Friendly
 }
