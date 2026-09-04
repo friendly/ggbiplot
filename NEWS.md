@@ -10,12 +10,16 @@
 - `ggbiplot()` gains a `varname.gap` argument to pull variable-vector arrowheads back
   (in mm) from their true endpoint, e.g. to keep them clear of the correlation circle or
   of crowded labels. Exposed on `ggvector()` as `gap`.
+- `ggvector()`'s (and so `ggbiplot()`'s) default arrow `linewidth` is now `0.9`, down from
+  `1.4` (which matched the shaft width of the old `grid::arrow()`-based rendering).
+  `ggarrow`'s default `arrow_head_wings()` ornament reads visually heavier than the old
+  plain triangular arrowhead at the same linewidth, so `1.4` now looks noticeably thicker
+  than the pre-`ggarrow` arrows did; `0.9` was chosen to look comparable. Use
+  `vector.args = list(linewidth = 1.4)` to get the old shaft weight back.
 - `ggbiplot()` gains a `vector.args` argument: a named list forwarded to the `ggvector()`
-  call that draws the variable-vector arrows, e.g. `list(linewidth = 0.8)` for thinner
-  arrows (the `ggarrow` default arrowhead can look noticeably heavier than the old
-  `grid::arrow()`-based one) or `list(arrow_head = ggarrow::arrow_head_line())` for a
-  different arrowhead shape. Anything not matched by a `ggvector()` argument passes on to
-  `ggarrow::geom_arrow_segment()` (`justify`, `force_arrow`, `sep`, `distort`, ...).
+  call that draws the variable-vector arrows, e.g. `list(arrow_head = ggarrow::arrow_head_line())`
+  for a different arrowhead shape. Anything not matched by a `ggvector()` argument passes on
+  to `ggarrow::geom_arrow_segment()` (`justify`, `force_arrow`, `sep`, `distort`, ...).
 
 ## Version 0.6.4
 

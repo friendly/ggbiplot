@@ -122,11 +122,11 @@ variable-name labels. Passed to \code{\link{ggvector}}'s \code{gap} argument (in
 
 \item{vector.args}{Named list of further arguments passed to the \code{\link{ggvector}} call that draws the
 variable-vector arrows, overriding its defaults (e.g. \code{color}, \code{adjust},
-\code{gap} above) or adding new ones. Useful for arrow appearance not otherwise exposed as
-a \code{ggbiplot()} argument, e.g. \code{list(linewidth = 0.8)} for thinner arrows (the
-\code{ggarrow} default arrowhead can look noticeably heavier than the old
-\code{grid::arrow()}-based one), or \code{list(arrow_head = ggarrow::arrow_head_line())}
-for a different arrowhead shape. Anything not matched by a named argument of
+\code{gap}, \code{linewidth} above) or adding new ones. Useful for arrow appearance not
+otherwise exposed as a \code{ggbiplot()} argument, e.g.
+\code{list(arrow_head = ggarrow::arrow_head_line())} for a different arrowhead shape, or
+\code{list(linewidth = 1.4)} to go back to the heavier shaft width used before the
+\code{ggarrow} switch. Anything not matched by a named argument of
 \code{\link{ggvector}} itself is passed on to \code{\link[ggarrow]{geom_arrow_segment}}
 (e.g. \code{justify}, \code{force_arrow}, \code{sep}, \code{distort}). Applies only to the
 arrow layer, not to the variable-name text labels.}

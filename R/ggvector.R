@@ -19,7 +19,10 @@
 #' @param scale        scale factor applied to `x` and `y` before drawing
 #' @param origin       origin of the vectors, a vector `c(x, y)`
 #' @param color        color for the vectors and their labels
-#' @param linewidth    linewidth for the vector arrows
+#' @param linewidth    linewidth for the vector arrows. Default `0.9` — thinner than the shaft
+#'                     width `grid::arrow()` used pre-`ggarrow` (`1.4`), because
+#'                     [ggarrow::arrow_head_wings()]'s default ornament reads visually heavier
+#'                     than the old plain triangular arrowhead at the same linewidth.
 #' @param arrow_head   an arrowhead ornament, e.g., from [ggarrow::arrow_head_wings()] or
 #'                     [ggarrow::arrow_head_line()], passed to [ggarrow::geom_arrow_segment()]
 #' @param length       length of the arrowhead; passed to [ggarrow::geom_arrow_segment()]
@@ -55,7 +58,7 @@ ggvector <- function(x, y, label = NULL,
                      scale = 1,
                      origin = c(0, 0),
                      color = "black",
-                     linewidth = 1.4,
+                     linewidth = 0.9,
                      arrow_head = ggarrow::arrow_head_wings(),
                      length = 4,
                      gap = 0,

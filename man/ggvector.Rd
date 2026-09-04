@@ -12,7 +12,7 @@ ggvector(
   scale = 1,
   origin = c(0, 0),
   color = "black",
-  linewidth = 1.4,
+  linewidth = 0.9,
   arrow_head = ggarrow::arrow_head_wings(),
   length = 4,
   gap = 0,
@@ -35,7 +35,10 @@ ggvector(
 
 \item{color}{color for the vectors and their labels}
 
-\item{linewidth}{linewidth for the vector arrows}
+\item{linewidth}{linewidth for the vector arrows. Default `0.9` — thinner than the shaft
+width `grid::arrow()` used pre-`ggarrow` (`1.4`), because
+[ggarrow::arrow_head_wings()]'s default ornament reads visually heavier
+than the old plain triangular arrowhead at the same linewidth.}
 
 \item{arrow_head}{an arrowhead ornament, e.g., from [ggarrow::arrow_head_wings()] or
 [ggarrow::arrow_head_line()], passed to [ggarrow::geom_arrow_segment()]}
