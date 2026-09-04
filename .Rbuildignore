@@ -10,3 +10,5 @@ pkgdown/
 _pkgdown.yaml
 ^CRAN-SUBMISSION$
 dev/
+^\.positai$
+^\.claude$

@@ -288,8 +288,8 @@ ggbiplot <- function(pcobj,
   nobs.factor <- ifelse (inherits(pcobj, 'prcomp'), sqrt(n-1), sqrt(n))
 
   # shutup 'no visible binding...'
-#  utils::globalVariables(c("xvar", "yvar", "varname", "angle", "hjust"))
-  angle <- circle_chol <- ed <- hjust <- mu <- sigma <- varname <- xvar <- yvar <-NULL
+#  utils::globalVariables(c("xvar", "yvar", "varname"))
+  circle_chol <- ed <- mu <- sigma <- varname <- xvar <- yvar <-NULL
 
   # Scores
   choices <- pmin(choices, ncol(u))
@@ -343,10 +343,6 @@ ggbiplot <- function(pcobj,
     vn <- abbreviate(vn)
   }
   df.v$varname <- vn
-
-  # Variables for text label placement
-  df.v$angle <- with(df.v, (180/pi) * atan(yvar / xvar))
-  df.v$hjust = with(df.v, (1 - varname.adjust * sign(xvar)) / 2)
 
   # Base plot
   g <- ggplot(data = df.u, aes(x = xvar, y = yvar)) + 
@@ -403,15 +399,11 @@ ggbiplot <- function(pcobj,
     }
 
     # Draw directions
-    if("arrow" %in% geom.var) {
-    arrow_style <- arrow(length = unit(1/2, 'picas'), type="closed", angle=15) 
     g <- g +
-      geom_segment(data = df.v,
-                   aes(x = 0, y = 0, xend = xvar, yend = yvar),
-                   arrow = arrow_style, 
-                   color = varname.color,
-                   linewidth = 1.4)    # MR: was 1.2
-    }
+      ggvector(df.v$xvar, df.v$yvar,
+               geom.var = intersect(geom.var, "arrow"),
+               color = varname.color,
+               adjust = varname.adjust)
   }
 
   # Overlay a concentration ellipse if there are groups
@@ -443,12 +435,13 @@ ggbiplot <- function(pcobj,
   }
 
   # Label the variable axes
-  if(var.axes & "text" %in% geom.var) {
-    g <- g + 
-    geom_text(data = df.v, 
-              aes(label = varname, x = xvar, y = yvar, 
-                  angle = angle, hjust = hjust), 
-              color = varname.color, size = varname.size, lineheight = 0.75)
+  if(var.axes) {
+    g <- g +
+      ggvector(df.v$xvar, df.v$yvar, label = df.v$varname,
+               geom.var = intersect(geom.var, "text"),
+               color = varname.color,
+               size = varname.size,
+               adjust = varname.adjust)
   }
   # Change the name of the legend for groups
   # if(!is.null(groups)) {

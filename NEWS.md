@@ -1,14 +1,18 @@
 ## Version 0.6.5
 
-- Now Depends R (>= 4.1.0) to handle |>
-- Added lda() objects to those handled by reflect()
+- Now Depends R (>= 4.1.0) to handle `|>`
+- Added `lda()` objects to those handled by `reflect()`
 - Illustrate reflection in ggbiplot examples
+- Added `ggvector()`, exported, to draw labeled vectors from a common origin using
+  `ggarrow::geom_arrow_segment()`. `ggbiplot()` now uses this internally to draw variable
+  vectors and their labels, replacing the previous `geom_segment()` + `grid::arrow()` code.
+  `ggarrow` is now a package dependency (Imports).
 
 ## Version 0.6.4
 
 - Documented solution to 'scale_color_discrete() produces two legends' #2
 - Fix glitch with axis labels
-- `ggbiplot` gains `geom.ind` and `geom.var` arguments for more flexlible handling of the geometries used to display the
+- `ggbiplot` gains `geom.ind` and `geom.var` arguments for more flexible handling of the geometries used to display the
 observation points and variable labels.
 
 ## Version 0.6.3

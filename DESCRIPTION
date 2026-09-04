@@ -21,6 +21,7 @@ Depends:
     R (>= 4.1.0),
     ggplot2
 Imports:
+    ggarrow,
     scales
 Suggests: 
     corrplot,
@@ -33,5 +34,5 @@ Encoding: UTF-8
 Language: en-US
 URL: https://github.com/friendly/ggbiplot, https://friendly.github.io/ggbiplot/
 BugReports: https://github.com/friendly/ggbiplot/issues
-RoxygenNote: 7.3.2
 LazyData: true
+Config/roxygen2/version: 8.1.0
