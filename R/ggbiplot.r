@@ -138,6 +138,24 @@
 #' @param varname.color   Color for the variable vectors and names
 #' @param varname.adjust  Adjustment factor the placement of the variable names, >= 1 means farther from the arrow
 #' @param varname.abbrev  logical; whether or not to abbreviate the variable names, using \code{\link{abbreviate}}.
+#' @param varname.gap     Distance to pull variable-vector arrowheads back from their true endpoint, leaving a small
+#'                        gap before the label. Given as a plain number, this is in \strong{millimetres} — a fixed
+#'                        physical distance on the drawn plot, \emph{not} in the data units of the PC scores — so it
+#'                        does not scale with \code{obs.scale}/\code{var.scale} or with the size of the plotting
+#'                        device. Can also be a \code{\link[grid]{unit}} object for other units. Useful to keep
+#'                        arrowheads from overlapping the correlation circle (\code{circle = TRUE}) or crowding the
+#'                        variable-name labels. Passed to \code{\link{ggvector}}'s \code{gap} argument (in turn
+#'                        \code{resect_head} of \code{\link[ggarrow]{geom_arrow_segment}}). Default \code{0} (no gap).
+#' @param vector.args     Named list of further arguments passed to the \code{\link{ggvector}} call that draws the
+#'                        variable-vector arrows, overriding its defaults (e.g. \code{color}, \code{adjust},
+#'                        \code{gap} above) or adding new ones. Useful for arrow appearance not otherwise exposed as
+#'                        a \code{ggbiplot()} argument, e.g. \code{list(linewidth = 0.8)} for thinner arrows (the
+#'                        \code{ggarrow} default arrowhead can look noticeably heavier than the old
+#'                        \code{grid::arrow()}-based one), or \code{list(arrow_head = ggarrow::arrow_head_line())}
+#'                        for a different arrowhead shape. Anything not matched by a named argument of
+#'                        \code{\link{ggvector}} itself is passed on to \code{\link[ggarrow]{geom_arrow_segment}}
+#'                        (e.g. \code{justify}, \code{force_arrow}, \code{sep}, \code{distort}). Applies only to the
+#'                        arrow layer, not to the variable-name text labels.
 #' @param axis.title      character; the prefix used as the axis labels. Default: \code{"PC"}.
 #' @param clip            should geoms be clipped at the axis limits? Default: "on"
 #' @param ...             other arguments passed down
@@ -203,10 +221,11 @@
 #'                     scale. = TRUE)
 #' ggbiplot(iris.pca, obs.scale = 1, var.scale = 1,
 #'          groups = iris$Species, point.size=2,
-#'          varname.size = 5, 
+#'          varname.size = 5,
 #'          varname.color = "black",
 #'          varname.adjust = 1.2,
-#'          ellipse = TRUE, 
+#'          varname.gap = 2,        # pull arrowheads off the correlation circle, in mm
+#'          ellipse = TRUE,
 #'          circle = TRUE) +
 #'   labs(fill = "Species", color = "Species") +
 #'   theme_minimal(base_size = 14) +
@@ -238,6 +257,8 @@ ggbiplot <- function(pcobj,
                      varname.adjust = 1.25, 
                      varname.color = "black",
                      varname.abbrev = FALSE,
+                     varname.gap = 0,
+                     vector.args = list(),
                      axis.title = "PC",
                      clip = "on",
                      ...)
@@ -399,11 +420,15 @@ ggbiplot <- function(pcobj,
     }
 
     # Draw directions
-    g <- g +
-      ggvector(df.v$xvar, df.v$yvar,
-               geom.var = intersect(geom.var, "arrow"),
-               color = varname.color,
-               adjust = varname.adjust)
+    arrow.args <- utils::modifyList(
+      list(x = df.v$xvar, y = df.v$yvar,
+           geom.var = intersect(geom.var, "arrow"),
+           color = varname.color,
+           adjust = varname.adjust,
+           gap = varname.gap),
+      vector.args
+    )
+    g <- g + do.call(ggvector, arrow.args)
   }
 
   # Overlay a concentration ellipse if there are groups

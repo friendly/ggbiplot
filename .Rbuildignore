@@ -4,6 +4,7 @@
 ^README-.*\.png$
 examples/
 discussion/
+issues/
 ^cran-comments\.md$
 docs/
 pkgdown/

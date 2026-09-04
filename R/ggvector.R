@@ -23,9 +23,15 @@
 #' @param arrow_head   an arrowhead ornament, e.g., from [ggarrow::arrow_head_wings()] or
 #'                     [ggarrow::arrow_head_line()], passed to [ggarrow::geom_arrow_segment()]
 #' @param length       length of the arrowhead; passed to [ggarrow::geom_arrow_segment()]
-#' @param resect       amount (in mm) to shorten the arrow from its tip, passed as `resect_head`
-#'                     to [ggarrow::geom_arrow_segment()]. Useful to keep arrowheads clear of a
-#'                     correlation circle or of crowded labels.
+#' @param gap          distance to pull the arrowhead back from the vector's true endpoint,
+#'                     passed as `resect_head` to [ggarrow::geom_arrow_segment()]. Given as a
+#'                     plain number, this is in **millimetres** — a fixed physical distance on
+#'                     the drawn plot, *not* in the (arbitrary) data units of `x`/`y` — so the
+#'                     same `gap` looks bigger or smaller depending on plot size/scale. Can also
+#'                     be a [grid::unit()] object for other units. Useful to keep arrowheads clear
+#'                     of a correlation circle or of crowded labels; does not move the label
+#'                     itself, which is still placed at the true `(x, y)` endpoint. Default `0`
+#'                     (no gap; arrowhead tip touches the endpoint).
 #' @param adjust       adjustment factor for label placement, >= 1 means farther from the arrowhead
 #' @param size         text size for labels
 #' @param lineheight   line height for (possibly multi-line) labels
@@ -52,7 +58,7 @@ ggvector <- function(x, y, label = NULL,
                      linewidth = 1.4,
                      arrow_head = ggarrow::arrow_head_wings(),
                      length = 4,
-                     resect = 0,
+                     gap = 0,
                      adjust = 1.25,
                      size = 3,
                      lineheight = 0.75,
@@ -79,7 +85,7 @@ ggvector <- function(x, y, label = NULL,
                                xend = .data$xend, yend = .data$yend),
         arrow_head = arrow_head,
         length = length,
-        resect_head = resect,
+        resect_head = gap,
         color = color,
         linewidth = linewidth,
         ...

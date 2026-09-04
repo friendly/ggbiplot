@@ -7,6 +7,15 @@
   `ggarrow::geom_arrow_segment()`. `ggbiplot()` now uses this internally to draw variable
   vectors and their labels, replacing the previous `geom_segment()` + `grid::arrow()` code.
   `ggarrow` is now a package dependency (Imports).
+- `ggbiplot()` gains a `varname.gap` argument to pull variable-vector arrowheads back
+  (in mm) from their true endpoint, e.g. to keep them clear of the correlation circle or
+  of crowded labels. Exposed on `ggvector()` as `gap`.
+- `ggbiplot()` gains a `vector.args` argument: a named list forwarded to the `ggvector()`
+  call that draws the variable-vector arrows, e.g. `list(linewidth = 0.8)` for thinner
+  arrows (the `ggarrow` default arrowhead can look noticeably heavier than the old
+  `grid::arrow()`-based one) or `list(arrow_head = ggarrow::arrow_head_line())` for a
+  different arrowhead shape. Anything not matched by a `ggvector()` argument passes on to
+  `ggarrow::geom_arrow_segment()` (`justify`, `force_arrow`, `sep`, `distort`, ...).
 
 ## Version 0.6.4
 
