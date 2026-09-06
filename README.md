@@ -8,7 +8,7 @@ status](https://www.r-pkg.org/badges/version/ggbiplot)](https://CRAN.R-project.o
 [![Last
 Commit](https://img.shields.io/github/last-commit/friendly/ggbiplot)](https://github.com/friendly/ggbiplot)
 [![Downloads](https://cranlogs.r-pkg.org/badges/ggbiplot)](https://cran.r-project.org/package=ggbiplot)
-[![pkgdown](https://img.shields.io/badge/documentation-blue)](https://friendly.github.io/ggbiplot)
+[![pkgdown](https://img.shields.io/badge/documentation-blue)](https://friendly.github.io/ggbiplot/)
 <!-- badges: end -->
 
 <!-- This repo for the **ggbiplot** package -->
