@@ -4,6 +4,7 @@
 
 [![CRAN
 status](https://www.r-pkg.org/badges/version/ggbiplot)](https://CRAN.R-project.org/package=ggbiplot)
+[![R-Universe](https://friendly.r-universe.dev/badges/ggbiplot)](https://friendly.r-universe.dev)
 [![Last
 Commit](https://img.shields.io/github/last-commit/friendly/ggbiplot)](https://github.com/friendly/ggbiplot)
 [![Downloads](https://cranlogs.r-pkg.org/badges/ggbiplot)](https://cran.r-project.org/package=ggbiplot)
@@ -37,7 +38,7 @@ The package was originally developed by Vince Vu at
 part by NSF Postdoctoral Fellowship DMS-0903120 from 2009-2012. The
 current version, now on CRAN, will be the locus of further development.
 
-## Installation
+## 📂 Installation
 
 You can install the latest CRAN version, or install from GitHub as shown
 below.
@@ -48,7 +49,7 @@ below.
 | R-universe      | `install.packages('ggbiplot', repos = c('https://friendly.r-universe.dev'))` |
 | GitHub `master` | `remotes::install_github("friendly/ggbiplot")`                               |
 
-## Examples
+## 📊 Examples
 
 Load packages:
 
