@@ -1,4 +1,4 @@
-url: http://friendly.github.io/ggbiplot/
+url: https://friendly.github.io/ggbiplot/
 
 template:
   bootstrap: 5
@@ -11,6 +11,7 @@ reference:
   - title: "Biplot functions"
     contents:
       - ggbiplot
+      - ggvector
       - ggscreeplot
       - reflect
       - get_SVD

@@ -52,6 +52,8 @@ ggbiplot(
   varname.adjust = 1.25,
   varname.color = "black",
   varname.abbrev = FALSE,
+  varname.gap = 0,
+  vector.args = list(),
   axis.title = "PC",
   clip = "on",
   ...
@@ -101,7 +103,7 @@ ggbiplot(
   Factor to be applied to variable vectors after scaling. This allows
   the variable vectors to be reflected (`var.factor = -1`) or expanded
   in length (`var.factor > 1`) for greater visibility.
-  [`reflect`](http://friendly.github.io/ggbiplot/reference/reflect.md)
+  [`reflect`](https://friendly.github.io/ggbiplot/reference/reflect.md)
   provides a simpler way to reflect the variables.
 
 - groups:
@@ -192,6 +194,34 @@ ggbiplot(
 
   logical; whether or not to abbreviate the variable names, using
   [`abbreviate`](https://rdrr.io/r/base/abbreviate.html).
+
+- varname.gap:
+
+  Distance to pull variable-vector arrowheads back from their true
+  endpoint, leaving a small gap before the label. Given as a plain
+  number, this is in \*\*millimeters\*\* — a fixed physical distance on
+  the drawn plot, \*not\* in the data units of the PC scores — so it
+  does not scale with \`obs.scale\`/\`var.scale\` or with the size of
+  the plotting device. Can also be a \[grid::unit()\] object for other
+  units. Useful to keep arrowheads from overlapping the correlation
+  circle (\`circle = TRUE\`) or crowding the variable-name labels.
+  Passed to \[ggvector()\]'s \`gap\` argument (in turn \`resect_head\`
+  of \[ggarrow::geom_arrow_segment()\]). Default \`0\` (no gap).
+
+- vector.args:
+
+  Named list of further arguments passed to the \[ggvector()\] call that
+  draws the variable-vector arrows, overriding its defaults (e.g.
+  \`color\`, \`adjust\`, \`gap\`, \`linewidth\` above) or adding new
+  ones. Useful for arrow appearance not otherwise exposed as a
+  \`ggbiplot()\` argument, e.g. \`list(arrow_head =
+  ggarrow::arrow_head_line())\` for a different arrowhead shape, or
+  \`list(linewidth = 1.4)\` to go back to the heavier shaft width used
+  before the \`ggarrow\` switch. Anything not matched by a named
+  argument of \[ggvector()\] itself is passed on to
+  \[ggarrow::geom_arrow_segment()\] (e.g. \`justify\`, \`force_arrow\`,
+  \`sep\`, \`distort\`). Applies only to the arrow layer, not to the
+  variable-name text labels.
 
 - axis.title:
 
@@ -305,11 +335,11 @@ Biplots*. Wiley.
 
 ## See also
 
-[`reflect`](http://friendly.github.io/ggbiplot/reference/reflect.md),
-[`ggscreeplot`](http://friendly.github.io/ggbiplot/reference/ggscreeplot.md);
+[`reflect`](https://friendly.github.io/ggbiplot/reference/reflect.md),
+[`ggscreeplot`](https://friendly.github.io/ggbiplot/reference/ggscreeplot.md);
 [`biplot`](https://rdrr.io/r/stats/biplot.html) for the original stats
 package version;
-[`fviz_pca_biplot`](https://rdrr.io/pkg/factoextra/man/fviz_pca.html)
+[`fviz_pca_biplot`](https://rpkgs.datanovia.com/factoextra/reference/fviz_pca.html)
 for the factoextra package version.
 
 ## Author
@@ -352,10 +382,11 @@ iris.pca <- prcomp (~ Sepal.Length + Sepal.Width + Petal.Length + Petal.Width,
                     scale. = TRUE)
 ggbiplot(iris.pca, obs.scale = 1, var.scale = 1,
          groups = iris$Species, point.size=2,
-         varname.size = 5, 
+         varname.size = 5,
          varname.color = "black",
          varname.adjust = 1.2,
-         ellipse = TRUE, 
+         varname.gap = 2,        # pull arrowheads off the correlation circle, in mm
+         ellipse = TRUE,
          circle = TRUE) +
   labs(fill = "Species", color = "Species") +
   theme_minimal(base_size = 14) +

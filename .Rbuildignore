@@ -13,3 +13,4 @@ _pkgdown.yaml
 dev/
 ^\.positai$
 ^\.claude$
+^\.release_check_result\.rds$

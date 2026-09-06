@@ -1,14 +1,14 @@
 # ggbiplot
 
-**Version** 0.6.2 ( master branch )
+**Version** 0.6.5 ( master branch )
 
 This package provides a `ggplot2` implementation of the biplot, a
 simultaneous plot of scores for observations and vectors for variables
 for principal component-like analyses.  
 The package provides two main functions:
-[`ggscreeplot()`](http://friendly.github.io/ggbiplot/reference/ggscreeplot.md)
+[`ggscreeplot()`](https://friendly.github.io/ggbiplot/reference/ggscreeplot.md)
 and
-[`ggbiplot()`](http://friendly.github.io/ggbiplot/reference/ggbiplot.md).
+[`ggbiplot()`](https://friendly.github.io/ggbiplot/reference/ggbiplot.md).
 
 `ggbiplot` aims to be a drop-in replacement for the standard R function
 [`stats::biplot()`](https://rdrr.io/r/stats/biplot.html) with extended
@@ -100,10 +100,11 @@ labeling the states by their state abbreviation:
 
 ``` r
 ggbiplot(crime.pca,
+         geom.ind = "text",
          labels = crime$st ,
          circle = TRUE,
          varname.size = 4,
-         varname.color = "red") 
+         varname.color = "red")
 ```
 
 ![](reference/figures/README-crime-biplot0-1.png)
@@ -119,10 +120,11 @@ group and to summarized by groups.
 crime.pca <- reflect(crime.pca)
 ggbiplot(crime.pca,
          groups = crime$region,
+         geom.ind = "text",
          labels = crime$st,
          labels.size = 4,
          var.factor = 1.4,
-         ellipse = TRUE, ellipse.level = 0.5, ellipse.alpha = 0.1,
+         ellipse = TRUE, ellipse.prob = 0.5, ellipse.alpha = 0.1,
          circle = TRUE,
          varname.size = 4,
          varname.color = "black") +
@@ -254,9 +256,9 @@ group.labs <-
 
 group.labs
 #>       groups   xvar   yvar
-#> 1     setosa -2.217 -0.288
-#> 2 versicolor  0.495  0.548
-#> 3  virginica  1.723 -0.260
+#> 1     setosa -2.210 -0.287
+#> 2 versicolor  0.493  0.547
+#> 3  virginica  1.717 -0.260
 ```
 
 Now, just use `geom_label` to draw labels for the groups.
