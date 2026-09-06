@@ -17,6 +17,10 @@ across CRAN and dev versions of this package.
 
 ## Submission notes
 
+This update also resolves the NOTE currently shown on the CRAN check page for the published
+0.6.2 ("Missing dependency on R >= 4.1.0 because package code uses the pipe |> ... syntax"):
+`DESCRIPTION` now declares `Depends: R (>= 4.1.0)`.
+
 This is an update from the CRAN version (0.6.2) to 0.6.5, rolling up the following releases
 (from NEWS.md):
 
