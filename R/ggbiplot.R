@@ -1,5 +1,5 @@
 # 
-#  ggbiplot.r
+#  ggbiplot.R
 #  
 #  Copyright 2011 Vincent Q. Vu.
 # 
