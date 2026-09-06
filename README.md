@@ -18,7 +18,7 @@ Commit](https://img.shields.io/github/last-commit/friendly/ggbiplot)](https://gi
 
 # ggbiplot <img src="man/figures/logo.png" height="200" style="float:right; height:200px;"/>
 
-**Version** 0.6.5 ( master branch )
+**Version** 0.6.5; documentation built for `pkgdown` 2026-09-06
 
 This package provides a `ggplot2` implementation of the biplot, a
 simultaneous plot of scores for observations and vectors for variables
@@ -42,10 +42,11 @@ current version, now on CRAN, will be the locus of further development.
 You can install the latest CRAN version, or install from GitHub as shown
 below.
 
-|                 |                                                |
-|-----------------|------------------------------------------------|
-| CRAN version    | `install.packages("ggbiplot")`                 |
-| GitHub `master` | `remotes::install_github("friendly/ggbiplot")` |
+|                 |                                                                              |
+|-----------------|------------------------------------------------------------------------------|
+| CRAN version    | `install.packages("ggbiplot")`                                               |
+| R-universe      | `install.packages('ggbiplot', repos = c('https://friendly.r-universe.dev'))` |
+| GitHub `master` | `remotes::install_github("friendly/ggbiplot")`                               |
 
 ## Examples
 

@@ -46,7 +46,7 @@ git_branch <- function() {
 ```
 
 # ggbiplot <img src="man/figures/logo.png" height="200" style="float:right; height:200px;"/>
-**Version** `r packageVersion("ggbiplot")` ( `r git_branch()` branch )
+**Version** `r packageVersion("ggbiplot")`; documentation built for `pkgdown` `r Sys.Date()`
 
 This package provides a `ggplot2` implementation of the biplot, a simultaneous
 plot of scores for observations and vectors for variables for principal component-like analyses.  
@@ -65,12 +65,14 @@ The current version, now on CRAN, will be the locus of further development.
 
 You can install the latest CRAN version, or install from GitHub as shown below.
 
-+-------------------+-----------------------------------------------------------------+
-| CRAN version      | `install.packages("ggbiplot")`                                  |
-+-------------------+-----------------------------------------------------------------+
-| GitHub            | `remotes::install_github("friendly/ggbiplot")`                  |
-| `master`          |                                                                 |
-+-------------------+-----------------------------------------------------------------+
++-------------------+------------------------------------------------------------------------------+
+| CRAN version      | `install.packages("ggbiplot")`                                               |
++-------------------+------------------------------------------------------------------------------+
+| R-universe        | `install.packages('ggbiplot', repos = c('https://friendly.r-universe.dev'))` |
++-------------------+------------------------------------------------------------------------------+
+| GitHub            | `remotes::install_github("friendly/ggbiplot")`                               |
+| `master`          |                                                                              |
++-------------------+------------------------------------------------------------------------------+
 
 
 ## Examples
