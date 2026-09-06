@@ -1,13 +1,19 @@
 ## Test environments
 
 * Windows 11, R 4.6.1 (2026-06-24 ucrt), local `devtools::check(cran = TRUE, remote = TRUE)`
-* win-builder (devel and release)
+* R Under development (unstable) (2026-09-04 r90492 ucrt)
 
 ## R CMD check results
 
 0 errors | 0 warnings | 0 notes
 
 ## Reverse dependencies
+
+We checked 3 reverse dependencies (CoDaLoMic, heplots, pPCA), comparing R CMD check results
+across CRAN and dev versions of this package.
+
+* We saw 0 new problems
+* We failed to check 0 packages
 
 ## Submission notes
 
