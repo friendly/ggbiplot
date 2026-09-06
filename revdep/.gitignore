@@ -1,0 +1,6 @@
+checks
+library
+*.Rcheck
+*.log
+Rplots.pdf
+data.sqlite
