@@ -112,23 +112,23 @@ of the dataset.}
 \item{varname.abbrev}{logical; whether or not to abbreviate the variable names, using \code{\link{abbreviate}}.}
 
 \item{varname.gap}{Distance to pull variable-vector arrowheads back from their true endpoint, leaving a small
-gap before the label. Given as a plain number, this is in \strong{millimetres} — a fixed
-physical distance on the drawn plot, \emph{not} in the data units of the PC scores — so it
-does not scale with \code{obs.scale}/\code{var.scale} or with the size of the plotting
-device. Can also be a \code{\link[grid]{unit}} object for other units. Useful to keep
-arrowheads from overlapping the correlation circle (\code{circle = TRUE}) or crowding the
-variable-name labels. Passed to \code{\link{ggvector}}'s \code{gap} argument (in turn
-\code{resect_head} of \code{\link[ggarrow]{geom_arrow_segment}}). Default \code{0} (no gap).}
+gap before the label. Given as a plain number, this is in **millimeters** — a fixed
+physical distance on the drawn plot, *not* in the data units of the PC scores — so it
+does not scale with `obs.scale`/`var.scale` or with the size of the plotting
+device. Can also be a [grid::unit()] object for other units. Useful to keep
+arrowheads from overlapping the correlation circle (`circle = TRUE`) or crowding the
+variable-name labels. Passed to [ggvector()]'s `gap` argument (in turn
+`resect_head` of [ggarrow::geom_arrow_segment()]). Default `0` (no gap).}
 
-\item{vector.args}{Named list of further arguments passed to the \code{\link{ggvector}} call that draws the
-variable-vector arrows, overriding its defaults (e.g. \code{color}, \code{adjust},
-\code{gap}, \code{linewidth} above) or adding new ones. Useful for arrow appearance not
-otherwise exposed as a \code{ggbiplot()} argument, e.g.
-\code{list(arrow_head = ggarrow::arrow_head_line())} for a different arrowhead shape, or
-\code{list(linewidth = 1.4)} to go back to the heavier shaft width used before the
-\code{ggarrow} switch. Anything not matched by a named argument of
-\code{\link{ggvector}} itself is passed on to \code{\link[ggarrow]{geom_arrow_segment}}
-(e.g. \code{justify}, \code{force_arrow}, \code{sep}, \code{distort}). Applies only to the
+\item{vector.args}{Named list of further arguments passed to the [ggvector()] call that draws the
+variable-vector arrows, overriding its defaults (e.g. `color`, `adjust`,
+`gap`, `linewidth` above) or adding new ones. Useful for arrow appearance not
+otherwise exposed as a `ggbiplot()` argument, e.g.
+`list(arrow_head = ggarrow::arrow_head_line())` for a different arrowhead shape, or
+`list(linewidth = 1.4)` to go back to the heavier shaft width used before the
+`ggarrow` switch. Anything not matched by a named argument of
+[ggvector()] itself is passed on to [ggarrow::geom_arrow_segment()]
+(e.g. `justify`, `force_arrow`, `sep`, `distort`). Applies only to the
 arrow layer, not to the variable-name text labels.}
 
 \item{axis.title}{character; the prefix used as the axis labels. Default: \code{"PC"}.}

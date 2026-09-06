@@ -1,22 +1,22 @@
 ## Test environments
 
-* Windows 10, R version 4.2.3 (2023-03-15 ucrt)
-* win-builder, R Under development (unstable) (2023-12-29 r85751 ucrt)
+* Windows 11, R 4.6.1 (2026-06-24 ucrt), local `devtools::check(cran = TRUE, remote = TRUE)`
+* win-builder (devel and release)
 
 ## R CMD check results
 
 0 errors | 0 warnings | 0 notes
 
-## Version 0.6.2
+## Submission notes
 
-This is a modest upgrade to the initial release, adding a number of features.
+This is an update from the CRAN version (0.6.2) to 0.6.5, rolling up several releases'
+worth of changes (see NEWS.md for full details of 0.6.3, 0.6.4, 0.6.5). Highlights:
 
-- corrected small bugs in `ggbiplot() and `ggscreeplot()`
-- `reflect()` now also reflects supplementary variables from `FactoMineR::PCA()`
-- added support for `ade4::dudi.pca()`
-- `ggbiplot()` gains an `axis.title` argument
-- `ggscreeplot()` gains `color`, `shape`, `linetype` and `linewidth` arguments
-- Added `get_SVD()` intended the simplify the interface to various PCA functions.
-- Now use `get_SVD()` in `ggbiplot()` and `ggscreeplot()`
-- Extend some examples, requiring Depends:ggplot2
+- `ggbiplot()` gains `geom.ind`/`geom.var`, `clip`, `varname.gap`, and `vector.args`
+  arguments for more flexible control of the plotted geometries.
+- Variable vectors are now drawn with `ggarrow::geom_arrow_segment()` instead of
+  `geom_segment()` + `grid::arrow()`. `ggarrow` is a new Imports dependency.
+- `reflect()` gains support for `MASS::lda()` objects.
+- Now Depends R (>= 4.1.0) for the native pipe (`|>`).
 
+No changes needed to reverse dependencies.

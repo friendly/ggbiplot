@@ -28,7 +28,7 @@
 #' @param length       length of the arrowhead; passed to [ggarrow::geom_arrow_segment()]
 #' @param gap          distance to pull the arrowhead back from the vector's true endpoint,
 #'                     passed as `resect_head` to [ggarrow::geom_arrow_segment()]. Given as a
-#'                     plain number, this is in **millimetres** — a fixed physical distance on
+#'                     plain number, this is in **millimeters** — a fixed physical distance on
 #'                     the drawn plot, *not* in the (arbitrary) data units of `x`/`y` — so the
 #'                     same `gap` looks bigger or smaller depending on plot size/scale. Can also
 #'                     be a [grid::unit()] object for other units. Useful to keep arrowheads clear
