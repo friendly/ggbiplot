@@ -53,6 +53,7 @@ ggbiplot(
   varname.color = "black",
   varname.abbrev = FALSE,
   varname.gap = 0,
+  varname.angle = NULL,
   vector.args = list(),
   axis.title = "PC",
   clip = "on",
@@ -207,6 +208,14 @@ ggbiplot(
   circle (\`circle = TRUE\`) or crowding the variable-name labels.
   Passed to \[ggvector()\]'s \`gap\` argument (in turn \`resect_head\`
   of \[ggarrow::geom_arrow_segment()\]). Default \`0\` (no gap).
+
+- varname.angle:
+
+  Angle (in degrees) for the variable-name text labels. Default \`NULL\`
+  computes each label's angle from its own vector's direction, as
+  before. Supply a fixed number (e.g. \`0\` for horizontal labels) to
+  use the same angle for every label instead. Passed to \[ggvector()\]'s
+  \`angle\` argument; applies only to the text labels, not the arrows.
 
 - vector.args:
 
@@ -386,6 +395,7 @@ ggbiplot(iris.pca, obs.scale = 1, var.scale = 1,
          varname.color = "black",
          varname.adjust = 1.2,
          varname.gap = 2,        # pull arrowheads off the correlation circle, in mm
+         varname.angle = 0,      # draw all variable-name labels horizontally
          ellipse = TRUE,
          circle = TRUE) +
   labs(fill = "Species", color = "Species") +

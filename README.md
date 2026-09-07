@@ -20,7 +20,7 @@ Commit](https://img.shields.io/github/last-commit/friendly/ggbiplot)](https://gi
 
 # ggbiplot <img src="man/figures/logo.png" height="200" style="float:right; height:200px;"/>
 
-**Version** 0.6.5; documentation built for `pkgdown` 2026-09-06
+**Version** 0.6.6; documentation built for `pkgdown` 2026-09-07
 
 This package provides a `ggplot2` implementation of the biplot, a
 simultaneous plot of scores for observations and vectors for variables

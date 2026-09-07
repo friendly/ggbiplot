@@ -31,7 +31,7 @@ also handles a discriminant analysis using lda."><meta property="og:image" conte
 
     <a class="navbar-brand me-2" href="../index.html">ggbiplot</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.6.5</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.6.6</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -102,6 +102,7 @@ also handles a discriminant analysis using <code><a href="https://rdrr.io/pkg/MA
 <span>  varname.color <span class="op">=</span> <span class="st">"black"</span>,</span>
 <span>  varname.abbrev <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  varname.gap <span class="op">=</span> <span class="fl">0</span>,</span>
+<span>  varname.angle <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  vector.args <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  axis.title <span class="op">=</span> <span class="st">"PC"</span>,</span>
 <span>  clip <span class="op">=</span> <span class="st">"on"</span>,</span>
@@ -248,6 +249,14 @@ variable-name labels. Passed to [ggvector()]'s `gap` argument (in turn
 `resect_head` of [ggarrow::geom_arrow_segment()]). Default `0` (no gap).</p></dd>
 
 
+<dt id="arg-varname-angle">varname.angle<a class="anchor" aria-label="anchor" href="#arg-varname-angle"></a></dt>
+<dd><p>Angle (in degrees) for the variable-name text labels. Default `NULL`
+computes each label's angle from its own vector's direction, as before.
+Supply a fixed number (e.g. `0` for horizontal labels) to use the same
+angle for every label instead. Passed to [ggvector()]'s `angle`
+argument; applies only to the text labels, not the arrows.</p></dd>
+
+
 <dt id="arg-vector-args">vector.args<a class="anchor" aria-label="anchor" href="#arg-vector-args"></a></dt>
 <dd><p>Named list of further arguments passed to the [ggvector()] call that draws the
 variable-vector arrows, overriding its defaults (e.g. `color`, `adjust`,
@@ -389,6 +398,7 @@ To avoid this, you need to have the same name for aesthetics to be merged in the
 <span class="r-in"><span>         varname.color <span class="op">=</span> <span class="st">"black"</span>,</span></span>
 <span class="r-in"><span>         varname.adjust <span class="op">=</span> <span class="fl">1.2</span>,</span></span>
 <span class="r-in"><span>         varname.gap <span class="op">=</span> <span class="fl">2</span>,        <span class="co"># pull arrowheads off the correlation circle, in mm</span></span></span>
+<span class="r-in"><span>         varname.angle <span class="op">=</span> <span class="fl">0</span>,      <span class="co"># draw all variable-name labels horizontally</span></span></span>
 <span class="r-in"><span>         ellipse <span class="op">=</span> <span class="cn">TRUE</span>,</span></span>
 <span class="r-in"><span>         circle <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">+</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="st">"Species"</span>, color <span class="op">=</span> <span class="st">"Species"</span><span class="op">)</span> <span class="op">+</span></span></span>

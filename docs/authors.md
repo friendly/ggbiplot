@@ -15,13 +15,13 @@ Source:
 [`DESCRIPTION`](https://github.com/friendly/ggbiplot/blob/HEAD/DESCRIPTION)
 
 Vu VQ, Friendly M (2026). *ggbiplot: A Grammar of Graphics
-Implementation of Biplots*. R package version 0.6.5,
+Implementation of Biplots*. R package version 0.6.6,
 <https://github.com/friendly/ggbiplot>.
 
     @Manual{,
       title = {ggbiplot: A Grammar of Graphics Implementation of Biplots},
       author = {Vincent Q. Vu and Michael Friendly},
       year = {2026},
-      note = {R package version 0.6.5},
+      note = {R package version 0.6.6},
       url = {https://github.com/friendly/ggbiplot},
     }
