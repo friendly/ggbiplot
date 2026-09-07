@@ -35,7 +35,7 @@ ggbiplot(
   varname.angle = NULL,
   vector.args = list(),
   axis.title = "PC",
-  clip = "on",
+  clip = "off",
   ...
 )
 }
@@ -140,7 +140,12 @@ arrow layer, not to the variable-name text labels.}
 
 \item{axis.title}{character; the prefix used as the axis labels. Default: \code{"PC"}.}
 
-\item{clip}{should geoms be clipped at the axis limits? Default: "on"}
+\item{clip}{should geoms be clipped at the axis limits? Default: `"off"` — a long
+variable name, or one pushed outward by a large `varname.adjust`, can
+extend past the panel edge (ggplot2 computes axis limits from each
+layer's anchor coordinates only, not the rendered text's extent);
+`"off"` lets that overflow draw into the margin instead of truncating
+it. Pass `"on"` to restore hard clipping at the panel edge.}
 
 \item{...}{other arguments passed down}
 }

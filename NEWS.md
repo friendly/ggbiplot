@@ -4,6 +4,11 @@
   label's angle from its own vector's direction, as before; supply a fixed number (e.g. `0`
   for horizontal labels) to use the same angle for every label instead. Exposed on `ggbiplot()`
   as `varname.angle`.
+- `ggbiplot()`'s `clip` argument now defaults to `"off"` (was `"on"`). This is a default-behavior
+  change: a long variable name, or one pushed outward by a large `varname.adjust`, can extend
+  past the panel edge (ggplot2 computes axis limits from each layer's anchor coordinates only,
+  not the rendered text's extent) — `"off"` lets that overflow draw into the margin instead of
+  silently truncating it. Pass `clip = "on"` to restore the old hard-clipping behavior.
 
 ## Version 0.6.5
 
