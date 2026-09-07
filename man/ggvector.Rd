@@ -19,6 +19,7 @@ ggvector(
   adjust = 1.25,
   size = 3,
   lineheight = 0.75,
+  angle = NULL,
   ...
 )
 }
@@ -61,6 +62,11 @@ itself, which is still placed at the true `(x, y)` endpoint. Default `0`
 
 \item{lineheight}{line height for (possibly multi-line) labels}
 
+\item{angle}{angle (in degrees) for the text labels. Default `NULL` computes each
+label's angle from its own vector's direction, as before. Supply a fixed
+number (e.g. `0` for horizontal labels) to use the same angle for every
+label instead, or a vector recycled across labels for per-label control.}
+
 \item{...}{other arguments passed to [ggarrow::geom_arrow_segment()]}
 }
 \value{
@@ -89,4 +95,9 @@ v <- as.data.frame(6 * wine.pca$rotation[, 1:2])
 ggplot(as.data.frame(wine.pca$x), aes(PC1, PC2)) +
   geom_point() +
   ggvector(v$PC1, v$PC2, label = rownames(v), color = "brown")
+
+# angle = 0 draws all labels horizontally, instead of along each vector
+ggplot(as.data.frame(wine.pca$x), aes(PC1, PC2)) +
+  geom_point() +
+  ggvector(v$PC1, v$PC2, label = rownames(v), color = "brown", angle = 0)
 }

@@ -1,3 +1,10 @@
+## Version 0.6.6
+
+- `ggvector()` gains an `angle` argument for the text labels. Default `NULL` computes each
+  label's angle from its own vector's direction, as before; supply a fixed number (e.g. `0`
+  for horizontal labels) to use the same angle for every label instead. Exposed on `ggbiplot()`
+  as `varname.angle`.
+
 ## Version 0.6.5
 
 - Now Depends R (>= 4.1.0) to handle `|>`

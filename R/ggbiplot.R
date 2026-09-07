@@ -156,6 +156,11 @@
 #'                        [ggvector()] itself is passed on to [ggarrow::geom_arrow_segment()]
 #'                        (e.g. `justify`, `force_arrow`, `sep`, `distort`). Applies only to the
 #'                        arrow layer, not to the variable-name text labels.
+#' @param varname.angle   Angle (in degrees) for the variable-name text labels. Default `NULL`
+#'                        computes each label's angle from its own vector's direction, as before.
+#'                        Supply a fixed number (e.g. `0` for horizontal labels) to use the same
+#'                        angle for every label instead. Passed to [ggvector()]'s `angle`
+#'                        argument; applies only to the text labels, not the arrows.
 #' @param axis.title      character; the prefix used as the axis labels. Default: \code{"PC"}.
 #' @param clip            should geoms be clipped at the axis limits? Default: "on"
 #' @param ...             other arguments passed down
@@ -225,6 +230,7 @@
 #'          varname.color = "black",
 #'          varname.adjust = 1.2,
 #'          varname.gap = 2,        # pull arrowheads off the correlation circle, in mm
+#'          varname.angle = 0,      # draw all variable-name labels horizontally
 #'          ellipse = TRUE,
 #'          circle = TRUE) +
 #'   labs(fill = "Species", color = "Species") +
@@ -258,6 +264,7 @@ ggbiplot <- function(pcobj,
                      varname.color = "black",
                      varname.abbrev = FALSE,
                      varname.gap = 0,
+                     varname.angle = NULL,
                      vector.args = list(),
                      axis.title = "PC",
                      clip = "on",
@@ -466,7 +473,8 @@ ggbiplot <- function(pcobj,
                geom.var = intersect(geom.var, "text"),
                color = varname.color,
                size = varname.size,
-               adjust = varname.adjust)
+               adjust = varname.adjust,
+               angle = varname.angle)
   }
   # Change the name of the legend for groups
   # if(!is.null(groups)) {

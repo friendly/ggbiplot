@@ -38,6 +38,10 @@
 #' @param adjust       adjustment factor for label placement, >= 1 means farther from the arrowhead
 #' @param size         text size for labels
 #' @param lineheight   line height for (possibly multi-line) labels
+#' @param angle        angle (in degrees) for the text labels. Default `NULL` computes each
+#'                     label's angle from its own vector's direction, as before. Supply a fixed
+#'                     number (e.g. `0` for horizontal labels) to use the same angle for every
+#'                     label instead, or a vector recycled across labels for per-label control.
 #' @param ...          other arguments passed to [ggarrow::geom_arrow_segment()]
 #'
 #' @return A list of ggplot2 layers that can be added to an existing plot with `+`.
@@ -53,6 +57,11 @@
 #' ggplot(as.data.frame(wine.pca$x), aes(PC1, PC2)) +
 #'   geom_point() +
 #'   ggvector(v$PC1, v$PC2, label = rownames(v), color = "brown")
+#'
+#' # angle = 0 draws all labels horizontally, instead of along each vector
+#' ggplot(as.data.frame(wine.pca$x), aes(PC1, PC2)) +
+#'   geom_point() +
+#'   ggvector(v$PC1, v$PC2, label = rownames(v), color = "brown", angle = 0)
 ggvector <- function(x, y, label = NULL,
                      geom.var = c("arrow", "text"),
                      scale = 1,
@@ -65,6 +74,7 @@ ggvector <- function(x, y, label = NULL,
                      adjust = 1.25,
                      size = 3,
                      lineheight = 0.75,
+                     angle = NULL,
                      ...){
 
   x <- x * scale
@@ -75,7 +85,7 @@ ggvector <- function(x, y, label = NULL,
 
   dx <- df$xend - origin[1]
   dy <- df$yend - origin[2]
-  df$angle <- (180 / pi) * atan(dy / dx)
+  df$angle <- if (is.null(angle)) (180 / pi) * atan(dy / dx) else angle
   df$hjust <- (1 - adjust * sign(dx)) / 2
 
   layers <- list()
