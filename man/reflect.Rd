@@ -2,54 +2,100 @@
 % Please edit documentation in R/reflect.R
 \name{reflect}
 \alias{reflect}
+\alias{reflect.prcomp}
+\alias{reflect.princomp}
+\alias{reflect.PCA}
+\alias{reflect.lda}
+\alias{reflect.data.frame}
+\alias{reflect.matrix}
+\alias{reflect.list}
+\alias{reflect.default}
 \title{Reflect Columns in a Principal Component-like Object}
 \usage{
-reflect(pcobj, columns = 1:2)
+reflect(pcobj, ...)
+
+\method{reflect}{prcomp}(pcobj, columns = 1:2, scale = 1, ...)
+
+\method{reflect}{princomp}(pcobj, columns = 1:2, scale = 1, ...)
+
+\method{reflect}{PCA}(pcobj, columns = 1:2, scale = 1, ...)
+
+\method{reflect}{lda}(pcobj, columns = 1:2, scale = 1, ...)
+
+\method{reflect}{data.frame}(pcobj, columns, scale = 1, ...)
+
+\method{reflect}{matrix}(pcobj, columns, scale = 1, ...)
+
+\method{reflect}{list}(pcobj, columns, scale = 1, ...)
+
+\method{reflect}{default}(pcobj, ...)
 }
 \arguments{
-\item{pcobj}{an object returned by \code{\link[stats]{prcomp}}, \code{\link[stats]{princomp}}, 
-\code{\link[FactoMineR]{PCA}}, or \code{\link[MASS]{lda}}}
+\item{pcobj}{an object to reflect: one of `prcomp`, `princomp`, [FactoMineR::PCA()],
+`lda`, a `data.frame`, a `matrix`, or a `list` of data frames/matrices
+with matching columns}
 
-\item{columns}{a vector of indices of the columns to reflect}
+\item{...}{arguments passed to methods}
+
+\item{columns}{for PCA-like objects, a vector of indices of the dimensions to reflect
+(default `1:2`). For the `data.frame`/`matrix`/`list` methods, a vector
+of column indices or names to negate -- there is no sensible default
+for an arbitrary table, so this must be supplied.}
+
+\item{scale}{a constant applied along with the reflection, so the selected columns
+become `-scale * columns` rather than just `-1 * columns`. Default `1`
+(plain reflection, no change in magnitude). Useful, e.g., to stretch or
+shrink variable vectors in a biplot at the same time as reflecting them;
+a negative `scale` scales without reflecting.}
 }
 \value{
-The pca-like object with specified columns of the 
-           variable loadings and observation scores multiplied
-           by -1.
+The object, of the same class, with the specified columns transformed to
+           `-scale * columns` -- the variable loadings and observation scores for
+           PCA-like objects, or the specified columns directly for a
+           `data.frame`/`matrix`/`list`.
 }
 \description{
-Principle component-like objects have variable loadings (the eigenvectors of the covariance/correlation matrix)
-whose signs are arbitrary, in the sense that a given column can be 
-reflected (multiplied by -1) without changing the fit.
-}
-\details{
-This function allows one to reflect any columns of the variable
-loadings (and corresponding observation scores). Coordinates for quantitative
-supplementary variables are also reflected if present.
-This is often
-useful for interpreting a biplot, for example when a component (often the first) has all negative signs.
+Principal component-like objects have variable loadings (the eigenvectors of the
+covariance/correlation matrix) whose signs are arbitrary, in the sense that a given
+column can be reflected (multiplied by -1) without changing the fit. `reflect()` is a
+generic function, with methods for PCA-like objects (`prcomp`, `princomp`,
+[FactoMineR::PCA()], `lda`) that reflect the variable loadings and corresponding
+observation scores (and supplementary variable coordinates, for `PCA`). 
+The S3 methods also allow for
+a plain `data.frame`, `matrix`, or a `list` of these, that negate the specified columns
+directly.
+
+This is often useful for interpreting a biplot, for example when a component (often the
+first) has all negative signs.
 }
 \examples{
 data(crime)
-crime.pca <- 
-  crime |> 
+crime.pca <-
+  crime |>
   dplyr::select(where(is.numeric)) |>
   prcomp(scale. = TRUE)
-  
+
  biplot(crime.pca)
- 
+
  crime.pca <- reflect(crime.pca)  # reflect columns 1:2
  biplot(crime.pca)
- 
+
  iris.lda <- MASS::lda(Species ~ ., data=iris)
  #reflect the first dimension
  iris.lda1 <- reflect(iris.lda, columns = 1)
  # compare predicted scores
  predict(iris.lda)$x |> head()
  predict(iris.lda1)$x |> head()
+
+ # reflect a column of an ordinary data.frame, by name or index
+ mtcars2 <- reflect(mtcars, columns = "mpg")
+ head(mtcars2$mpg)
+
+ # reflect AND stretch the variable vectors by a factor of 2
+ crime.pca3 <- reflect(crime.pca, scale = 2)
 }
 \seealso{
-\code{\link[stats]{prcomp}},  \code{\link[stats]{princomp}}, 
+\code{\link[stats]{prcomp}},  \code{\link[stats]{princomp}},
          \code{\link[FactoMineR]{PCA}}, \code{\link[MASS]{lda}}
 }
 \author{

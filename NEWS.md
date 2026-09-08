@@ -11,6 +11,16 @@
   not the rendered text's extent) — `"off"` lets that overflow draw into the margin instead of
   silently truncating it. Pass `clip = "on"` to restore the old hard-clipping behavior.
 
+- `reflect()` is now an S3 generic. The existing `prcomp`/`princomp`/`PCA`/`lda` behavior is
+  unchanged, and it gains `data.frame`, `matrix`, and `list` methods that negate the given
+  `columns` (by name or index) directly, so other packages/objects can register their own
+  `reflect.<class>()` method instead of needing changes here. 
+  
+- All `reflect()` methods also gain a `scale`
+  argument (default `1`): the selected columns become `-scale * columns` instead of just
+  `-1 * columns`, useful to stretch or shrink variable vectors in a biplot at the same time as
+  reflecting them (a negative `scale` scales without reflecting).
+
 ## Version 0.6.5
 
 - Now Depends R (>= 4.1.0) to handle `|>`
